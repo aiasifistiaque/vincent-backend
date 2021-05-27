@@ -1,5 +1,5 @@
 import express from 'express';
-import getSingleOrder from '../controller/order/getSIngleOrder.js';
+import getSingleOrder from '../controller/order/getSingleOrder.js';
 import getAllOrders from '../controller/order/getAllOrders.js';
 import addNewOrder from '../controller/order/addNewOrder.js';
 import getUserOrders from '../controller/order/getUserOrders.js';
