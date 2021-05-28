@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import { productData } from './data/productData.js';
 import Product from './models/productModel.js';
 import connectDB from './db.js';
 import colors from 'colors';
+import { pData } from './data/pData.js';
 
 dotenv.config();
 connectDB();
@@ -13,7 +13,7 @@ const importData = async () => {
 		//await Order.deleteMany();
 		await Product.deleteMany();
 
-		const sampleProducts = productData.map(product => {
+		const sampleProducts = pData.map(product => {
 			return { ...product, user: '60ae538719a9df4204e329f5' };
 		});
 
