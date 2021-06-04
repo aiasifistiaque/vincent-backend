@@ -391,8 +391,8 @@ export const productData =
 			price: 60,
 		},
 		{
-			category: 'Satin Mask ',
-			subCategory: 'Satin Mask ',
+			category: 'Satin Mask',
+			subCategory: 'Satin Mask',
 			image: '/satin mask/Satin Mask Black per piece-150 taka.jpg',
 			name: 'Satin Mask Black',
 			description: '',
@@ -401,8 +401,8 @@ export const productData =
 			price: 150,
 		},
 		{
-			category: 'Satin Mask ',
-			subCategory: 'Satin Mask ',
+			category: 'Satin Mask',
+			subCategory: 'Satin Mask',
 			image: '/satin mask/Satin mask bottle green per piece price-150.jpg',
 			name: 'Satin Mask Bottle Green',
 			description: '',
@@ -411,8 +411,8 @@ export const productData =
 			price: 150,
 		},
 		{
-			category: 'Satin Mask ',
-			subCategory: 'Satin Mask ',
+			category: 'Satin Mask',
+			subCategory: 'Satin Mask',
 			image: '/satin mask/Satin mask COPPER per piece price-150.jpeg',
 			name: 'Satin Mask COPPER',
 			description: '',
@@ -421,8 +421,8 @@ export const productData =
 			price: 150,
 		},
 		{
-			category: 'Satin Mask ',
-			subCategory: 'Satin Mask ',
+			category: 'Satin Mask',
+			subCategory: 'Satin Mask',
 			image: '/satin mask/Satin mask GO PASTEL set of 4 price-500.jpeg',
 			name: 'Satin Mask GO PASTEL',
 			description: '',
@@ -431,8 +431,8 @@ export const productData =
 			price: 150,
 		},
 		{
-			category: 'Satin Mask ',
-			subCategory: 'Satin Mask ',
+			category: 'Satin Mask',
+			subCategory: 'Satin Mask',
 			image: '/satin mask/Satin mask GREY per piece price-150.jpeg',
 			name: 'Satin Mask GREY',
 			description:
@@ -442,8 +442,8 @@ export const productData =
 			price: 150,
 		},
 		{
-			category: 'Satin Mask ',
-			subCategory: 'Satin Mask ',
+			category: 'Satin Mask',
+			subCategory: 'Satin Mask',
 			image: '/satin mask/Satin Mask Lavender per piece 150.jpeg',
 			name: 'Satin Mask Lavender',
 			description: '',
@@ -452,8 +452,8 @@ export const productData =
 			price: 150,
 		},
 		{
-			category: 'Satin Mask ',
-			subCategory: 'Satin Mask ',
+			category: 'Satin Mask',
+			subCategory: 'Satin Mask',
 			image: '/satin mask/Satin mask MAGENTA per piece price-150.jpeg',
 			name: 'Satin Mask MAGENTA',
 			description: '',
@@ -462,8 +462,8 @@ export const productData =
 			price: 150,
 		},
 		{
-			category: 'Satin Mask ',
-			subCategory: 'Satin Mask ',
+			category: 'Satin Mask',
+			subCategory: 'Satin Mask',
 			image: '/satin mask/Satin mask MAUVE per piece price-150.jpeg',
 			name: 'Satin Mask MAUVE',
 			description: '',
@@ -472,8 +472,8 @@ export const productData =
 			price: 150,
 		},
 		{
-			category: 'Satin Mask ',
-			subCategory: 'Satin Mask ',
+			category: 'Satin Mask',
+			subCategory: 'Satin Mask',
 			image: '/satin mask/Satin Mask Pink per piece - 150.jpeg',
 			name: 'Satin Mask Pink',
 			description: '',
@@ -482,8 +482,8 @@ export const productData =
 			price: 150,
 		},
 		{
-			category: 'Satin Mask ',
-			subCategory: 'Satin Mask ',
+			category: 'Satin Mask',
+			subCategory: 'Satin Mask',
 			image: '/satin mask/Satin Mask Sky Blue per piece - 150.jpeg',
 			name: 'Satin Mask Sky Blue',
 			description: '',
@@ -492,8 +492,8 @@ export const productData =
 			price: 150,
 		},
 		{
-			category: 'Satin Mask ',
-			subCategory: 'Satin Mask ',
+			category: 'Satin Mask',
+			subCategory: 'Satin Mask',
 			image: '/satin mask/Satin mask THE ELITE price-500.jpeg',
 			name: 'Satin Mask THE ELITE',
 			description:
