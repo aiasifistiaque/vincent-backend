@@ -4,7 +4,7 @@ import Order from '../../models/orderModel.js';
 const addNewOrder = asyncHandler(async (req, res) => {
 	const { orderItems } = req.body;
 
-	console.log(req.body);
+	//console.log(req.body);
 
 	if (orderItems && orderItems.length === 0) {
 		return res.status(400).json('no order items');

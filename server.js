@@ -10,7 +10,7 @@ import colors from 'colors';
 import orderRoute from './routes/orderRoute.js';
 import cors from 'cors';
 import userRoute from './routes/userRoute.js';
-//import gatewayRoute from './routes/gatewayRoute.js';
+import searchRoute from './routes/searchRoute.js';
 
 dotenv.config();
 
@@ -46,6 +46,8 @@ app.use('/api/products', productsRoute);
 app.use('/api/categories', categoryRoute);
 app.use('/api/order', orderRoute);
 app.use('/api/profile', userRoute);
+app.use('/api/search', searchRoute);
+
 //app.use('/api/payment', gatewayRoute);
 
 const port = process.env.PORT || 5000;
