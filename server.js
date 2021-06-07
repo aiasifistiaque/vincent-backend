@@ -11,6 +11,7 @@ import orderRoute from './routes/orderRoute.js';
 import cors from 'cors';
 import userRoute from './routes/userRoute.js';
 import searchRoute from './routes/searchRoute.js';
+import exploreRoute from './routes/exploreRoute.js';
 
 dotenv.config();
 
@@ -47,6 +48,7 @@ app.use('/api/categories', categoryRoute);
 app.use('/api/order', orderRoute);
 app.use('/api/profile', userRoute);
 app.use('/api/search', searchRoute);
+app.use('/api/explore', exploreRoute);
 
 //app.use('/api/payment', gatewayRoute);
 
