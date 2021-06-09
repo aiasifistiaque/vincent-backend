@@ -2,8 +2,13 @@ import asyncHandler from 'express-async-handler';
 import { User } from '../../models/userModel.js';
 
 const getAllUsers = asyncHandler(async (req, res) => {
+	let sort = { role: ['user', 'admin'] };
+	const option = req.body.sort;
+	if (option == 'User') sort = { role: 'user' };
+	if (option == 'Admin') sort = { role: 'admin' };
+
 	try {
-		const user = await User.find().select(['-password']);
+		const user = await User.find(sort).select(['-password']);
 		res.status(200).json(user);
 	} catch (error) {
 		res.status(404).json({ msg: error.message });

@@ -12,6 +12,7 @@ import cors from 'cors';
 import userRoute from './routes/userRoute.js';
 import searchRoute from './routes/searchRoute.js';
 import exploreRoute from './routes/exploreRoute.js';
+import dashRoute from './routes/dashRoute.js';
 
 dotenv.config();
 
@@ -49,6 +50,7 @@ app.use('/api/order', orderRoute);
 app.use('/api/profile', userRoute);
 app.use('/api/search', searchRoute);
 app.use('/api/explore', exploreRoute);
+app.use('/api/dashboard', dashRoute);
 
 //app.use('/api/payment', gatewayRoute);
 

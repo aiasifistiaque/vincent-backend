@@ -7,7 +7,7 @@ import deleteProduct from '../controller/product/deleteProduct.js';
 
 const router = express.Router();
 
-router.get('/', getAllProducts);
+router.post('/', getAllProducts);
 
 router.post('/createproduct', protect, admin, createNewPorduct);
 
