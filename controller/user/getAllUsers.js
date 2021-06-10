@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler';
 import { User } from '../../models/userModel.js';
 
 const getAllUsers = asyncHandler(async (req, res) => {
-	let sort = { role: ['user', 'admin'] };
+	let sort = { role: ['user', 'admin', 'manager'] };
 	const option = req.body.sort;
 	if (option == 'User') sort = { role: 'user' };
 	if (option == 'Admin') sort = { role: 'admin' };
