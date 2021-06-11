@@ -40,6 +40,11 @@ const productSchema = mongoose.Schema(
 			trim: true,
 		},
 
+		status: {
+			type: String,
+			default: 'visible',
+		},
+
 		subCategory: {
 			type: String,
 		},

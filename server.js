@@ -13,6 +13,8 @@ import userRoute from './routes/userRoute.js';
 import searchRoute from './routes/searchRoute.js';
 import exploreRoute from './routes/exploreRoute.js';
 import dashRoute from './routes/dashRoute.js';
+import uploadRoute from './routes/uploadRoute.js';
+import path from 'path';
 
 dotenv.config();
 
@@ -51,6 +53,10 @@ app.use('/api/profile', userRoute);
 app.use('/api/search', searchRoute);
 app.use('/api/explore', exploreRoute);
 app.use('/api/dashboard', dashRoute);
+app.use('/api/upload', uploadRoute);
+
+const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 //app.use('/api/payment', gatewayRoute);
 

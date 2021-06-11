@@ -2,6 +2,8 @@ import Product from '../../models/productModel.js';
 import asyncHandler from 'express-async-handler';
 
 const createNewPorduct = asyncHandler(async (req, res) => {
+	if (req.body.upload == true) {
+	}
 	//console.log(req);
 	try {
 		const product = new Product({
@@ -13,6 +15,7 @@ const createNewPorduct = asyncHandler(async (req, res) => {
 			subCategory: req.body.subCategory,
 			note: req.body.note,
 			category: req.body.category,
+			status: req.body.status,
 			countInStock: req.body.countInStock,
 			description: req.body.description,
 		});

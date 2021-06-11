@@ -5,7 +5,7 @@ const editOrder = asyncHandler(async (req, res) => {
 	const { id, status, paid } = req.body;
 
 	try {
-		const order = await Order.findById(id);
+		const order = await Order.findById(id).populate('user', 'id name email');
 		order.status = status;
 		order.isPaid = paid;
 		const saveOrder = await order.save();
