@@ -17,7 +17,9 @@ router.post(
 		else if (option == 'nameAsc') sort = 'name';
 		else if (option == 'nameDec') sort = '-name';
 
-		const products = await Product.find()
+		const products = await Product.find({
+			status: { $nin: ['hidden', 'archived'] },
+		})
 			.limit(perPage)
 			.skip(page * perPage)
 			.sort(sort);
