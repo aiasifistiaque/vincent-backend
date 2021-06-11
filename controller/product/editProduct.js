@@ -11,6 +11,7 @@ const editProduct = asyncHandler(async (req, res) => {
 		price,
 		category,
 		subCategory,
+		status,
 	} = req.body;
 	console.log(req.body);
 	try {
@@ -23,6 +24,7 @@ const editProduct = asyncHandler(async (req, res) => {
 		product.category = category || '';
 		product.subCategory = subCategory || '';
 		product.countInStock = stock || 0;
+		product.status = status || '';
 		const saveProd = product.save();
 		res.status(200).json(saveProd);
 	} catch (e) {
