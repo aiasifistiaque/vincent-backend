@@ -2,7 +2,16 @@ import Product from '../../models/productModel.js';
 import asyncHandler from 'express-async-handler';
 
 const editProduct = asyncHandler(async (req, res) => {
-	const { name, size, description, note, stock, price } = req.body;
+	const {
+		name,
+		size,
+		description,
+		note,
+		stock,
+		price,
+		category,
+		subCategory,
+	} = req.body;
 	console.log(req.body);
 	try {
 		const product = await Product.findById(req.params.id);
@@ -11,6 +20,8 @@ const editProduct = asyncHandler(async (req, res) => {
 		product.description = description || '';
 		product.note = note || '';
 		product.price = price || 0;
+		product.category = category || '';
+		product.subCategory = subCategory || '';
 		product.countInStock = stock || 0;
 		const saveProd = product.save();
 		res.status(200).json(saveProd);
