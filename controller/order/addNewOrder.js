@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import Order from '../../models/orderModel.js';
+import sendMail from '../mail/sendMail.js';
 
 const addNewOrder = asyncHandler(async (req, res) => {
 	const { orderItems } = req.body;
@@ -21,8 +22,15 @@ const addNewOrder = asyncHandler(async (req, res) => {
 		});
 		try {
 			const createdOrder = await order.save();
+			const findOrder = await Order.findById(createdOrder._id).populate(
+				'user',
+				'id name email'
+			);
+			sendMail(findOrder);
+			console.log(findOrder);
 			res.status(201).json(createdOrder);
 		} catch (e) {
+			console.log(e);
 			res.status(500).json({ msg: e.message });
 		}
 	}
