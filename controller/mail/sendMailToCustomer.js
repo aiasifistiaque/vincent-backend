@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import getUnixToDate from '../../functions/unixToDate.js';
 
-const sendMail = order => {
+const sendMailToCustomer = order => {
 	console.log(order);
 	let quantity = 0;
 	order.orderItems.map(x => (quantity = quantity + x.qty));
@@ -34,13 +34,15 @@ const sendMail = order => {
 
 		var mailOptions = {
 			from: from,
-			to: 'asifistiaque.ai@gmail.com',
+			to: order.user.email,
 			subject: `Vincent's Sphere Order Summary (Order #${order._id})`,
 			text: 'Order placed Successfully',
 			html: `<div>
 					<h5 style="margin:0px;">Vincent's Sphere Order Summary</h5>
 					<h6 style="margin:0px;font-weight:400;">Date: ${date}</h6>
-					<hr/>
+                    <hr/>
+                    <p style="margin:0px;">Dear ${order.user.name},</p>
+                    <p style="margin:0px;">Thank you for choosing Vincent’s Sphere. Here’s a summary of your order.</p>
                     <h5 style="margin-bottom:5px">Customer #${order.user._id}</h5>
                     <p style="margin:0px;">Name: ${order.user.name}</p>
                     <p style="margin:0px;">Email: ${order.user.email}</p>
@@ -58,6 +60,10 @@ const sendMail = order => {
                     <hr/>
                     <p><strong>Items: ${quantity}</strong></p>
                     <p><strong>Sub Total: ৳${order.totalPrice}</strong></p>
+                    <br/>
+                    <p style="margin:0px;">If you have any queries about this order, You can contact us:</p>
+                    <p style="margin:0px;">Phone: 01312-795919</p>
+                    <p style="margin:0px;">Email: support@vincentsphere.com</p>
 				</div>`,
 		};
 
@@ -73,4 +79,4 @@ const sendMail = order => {
 	}
 };
 
-export default sendMail;
+export default sendMailToCustomer;

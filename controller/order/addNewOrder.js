@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Order from '../../models/orderModel.js';
 import sendMail from '../mail/sendMail.js';
+import sendMailToCustomer from '../mail/sendMailToCustomer.js';
 
 const addNewOrder = asyncHandler(async (req, res) => {
 	const { orderItems } = req.body;
@@ -27,7 +28,8 @@ const addNewOrder = asyncHandler(async (req, res) => {
 				'id name email'
 			);
 			sendMail(findOrder);
-			console.log(findOrder);
+			sendMailToCustomer(findOrder);
+			//console.log(findOrder);
 			res.status(201).json(createdOrder);
 		} catch (e) {
 			console.log(e);
