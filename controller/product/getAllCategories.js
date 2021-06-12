@@ -2,7 +2,8 @@ import Product from '../../models/productModel.js';
 import asyncHandler from 'express-async-handler';
 
 export const getAllCategories = asyncHandler(async (req, res) => {
-	const categories = await Product.distinct('category');
+	let sort = '-createdAt';
+	const categories = await Product.distinct('category').sort(sort);
 
 	if (categories) {
 		res.status(200).json(categories);
@@ -13,8 +14,9 @@ export const getAllCategories = asyncHandler(async (req, res) => {
 });
 
 export const getProductByCategory = asyncHandler(async (req, res) => {
-	const categories = await Product.find({ category: req.params.id });
+	let sort = '-createdAt';
 
+	const categories = await Product.find({ category: req.params.id }).sort(sort);
 	if (categories) {
 		res.status(200).json(categories);
 	} else {
@@ -24,7 +26,11 @@ export const getProductByCategory = asyncHandler(async (req, res) => {
 });
 
 export const getHomeProductByCategory = asyncHandler(async (req, res) => {
-	const categories = await Product.find({ category: req.params.id }).limit(6);
+	let sort = '-createdAt';
+
+	const categories = await Product.find({ category: req.params.id })
+		.sort(sort)
+		.limit(6);
 
 	if (categories) {
 		res.status(200).json(categories);
@@ -35,6 +41,8 @@ export const getHomeProductByCategory = asyncHandler(async (req, res) => {
 });
 
 export const getSubCategories = asyncHandler(async (req, res) => {
+	let sort = '-createdAt';
+
 	const categories = await Product.distinct('subCategory');
 
 	if (categories) {

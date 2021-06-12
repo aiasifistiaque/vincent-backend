@@ -4,6 +4,7 @@ const sendMail = order => {
 	console.log(order);
 	let quantity = 0;
 	order.orderItems.map(x => (quantity = quantity + x.qty));
+	const date = getUnixToDate(order.createdAt);
 	const items = order.orderItems.map(
 		(x, i) =>
 			`<div>
@@ -17,28 +18,32 @@ const sendMail = order => {
 		</div>`
 	);
 
+	const from = `Vincent's Sphere <support@vincentsphere.com>`;
+
 	try {
 		var transporter = nodemailer.createTransport({
-			service: 'gmail',
+			host: 'mail.privateemail.com',
+			port: 587,
+			secure: false,
 			auth: {
-				user: 'thinkcrypt@gmail.com',
-				pass: '01828398225',
+				user: 'support@vincentsphere.com',
+				pass: 'vincentsphere',
 			},
 		});
 
 		var mailOptions = {
-			from: 'thinkcrypt@gmail.com',
+			from: from,
 			to: 'asifistiaque.ai@gmail.com',
-			subject: 'New Order Placed',
-			text: JSON.stringify(order),
+			subject: `Vincent's Sphere Order Summary (Order #${order._id})`,
+			text: 'Order placed Successfully',
 			html: `<div>
-					<h3>Order Summary</h3>
-                    <h5>Order no: ${order._id}</h5>
-                    <hr/>
-                    <h5>Customer id: ${order.user._id}</h5>
-                    <p>Name: ${order.user.name}</p>
-                    <p>Email: ${order.user.email}</p>
-                    <h4>Phone: ${order.shippingAddress.phone}</h4>
+					<h5 style="margin:0px;">Vincent's Sphere Order Summary</h5>
+					<h6 style="margin:0px;font-weight:400;">Date: ${date}</h6>
+					<hr/>
+                    <h5 style="margin-bottom:5px">Customer #${order.user._id}</h5>
+                    <p style="margin:0px;">Name: ${order.user.name}</p>
+                    <p style="margin:0px;">Email: ${order.user.email}</p>
+                    <h4 style="margin-top:5px;">Phone: ${order.shippingAddress.phone}</h4>
 					<hr/>
 					<h3>Delivery Details</h3>
 					<p>
@@ -64,6 +69,69 @@ const sendMail = order => {
 		});
 	} catch (e) {
 		console.log(e);
+	}
+};
+
+const getUnixToDate = unix => {
+	const date = new Date(unix);
+	const day = date.getDate();
+	const month = date.getMonth();
+	const year = date.getFullYear();
+	const time = unixToHourMin(unix);
+
+	date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+	return `${getNumberToMonth(month)} ${day}, ${year} ${time}`;
+};
+
+const unixToHourMin = unix => {
+	const date = new Date(unix);
+	const hour = date.getHours();
+	const seconds = date.getSeconds();
+	let sec = seconds;
+	if (seconds < 10) {
+		sec = `0${sec}`;
+	}
+	const min =
+		date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+	if (hour == 0) return '12:' + min + ':' + sec + ' AM';
+	if (hour == 12) return '12:' + min + ':' + sec + ' PM';
+	if (hour < 12) {
+		if (hour < 10) return `0${hour}:${min}:${sec} AM`;
+		else return `${hour}:${min}:${sec}  AM`;
+	}
+	if (hour > 12) {
+		let hh = hour - 12;
+		if (hh < 10) return `0${hh}:${min}:${sec}  PM`;
+		else return `${hh}:${min}:${sec}  PM`;
+	}
+};
+
+const getNumberToMonth = month => {
+	switch (month.toString()) {
+		case '0':
+			return 'Jan';
+		case '1':
+			return 'Feb';
+		case '2':
+			return 'Mar';
+		case '3':
+			return 'Apr';
+		case '4':
+			return 'May';
+		case '5':
+			return 'Jun';
+		case '6':
+			return 'Jul';
+		case '7':
+			return 'Aug';
+		case '8':
+			return 'Sep';
+		case '9':
+			return 'Oct';
+		case '10':
+			return 'Nov';
+		case '11':
+			return 'Dec';
 	}
 };
 

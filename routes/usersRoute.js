@@ -17,14 +17,17 @@ router.post('/', async (req, res) => {
 	user = new User(_.pick(req.body, ['name', 'email', 'password', 'role']));
 	const salt = await bcrypt.genSalt(10);
 	user.password = await bcrypt.hash(user.password, salt);
-	await user.save();
+	try {
+		await user.save();
 
-	const token = user.generateAuthToken();
-
-	res
-		.status(200)
-		.header('x-auth-token', token)
-		.send(_.pick(user, ['_id', 'name', 'email', 'role']));
+		const token = user.generateAuthToken();
+		res
+			.status(200)
+			.header('x-auth-token', token)
+			.send(_.pick(user, ['_id', 'name', 'email', 'role']));
+	} catch (e) {
+		res.status(500).send(e);
+	}
 });
 
 export default router;
