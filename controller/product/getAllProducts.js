@@ -4,6 +4,8 @@ import asyncHandler from 'express-async-handler';
 const getAllProducts = asyncHandler(async (req, res) => {
 	let sort = '-createdAt';
 	const option = req.body.sort;
+	const perPage = 10;
+	const page = req.body.page || 0;
 	let select = { status: { $ne: 'archived' } };
 
 	if (option == 'Newest') sort = '-createdAt';
@@ -17,11 +19,14 @@ const getAllProducts = asyncHandler(async (req, res) => {
 	else if (option == 'Visible')
 		select = { status: { $nin: ['hidden', 'archived'] } };
 
-	const products = await Product.find(select).sort(sort);
-
-	if (products) {
-		res.status(200).json(products);
-	} else {
+	try {
+		const count = await Product.countDocuments(select);
+		const products = await Product.find(select)
+			.sort(sort)
+			.skip(page * perPage)
+			.limit(perPage);
+		res.status(200).json({ products: products, count: count });
+	} catch (e) {
 		res.status(500);
 		throw new Error('there was an error');
 	}

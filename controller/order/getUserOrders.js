@@ -2,14 +2,32 @@ import asyncHandler from 'express-async-handler';
 import Order from '../../models/orderModel.js';
 
 const getUserOrders = asyncHandler(async (req, res) => {
-	//console.log(req);
+	let select = { status: { $nin: ['completed,archived,cancelled'] } };
+	const perPage = 10;
+	const page = req.body.page || 0;
+
 	try {
-		const orders = await Order.find({ user: req.user._id })
+		if (req.body.status == 'Past') {
+			select = { status: 'completed' };
+		} else if (req.body.status == 'Current') {
+			select = { status: { $nin: ['completed,archived,cancelled'] } };
+		}
+
+		const count = await Order.countDocuments({
+			$and: [{ user: req.user._id }, select],
+		});
+
+		const orders = await Order.find({
+			$and: [{ user: req.user._id }, select],
+		})
 			.sort('-createdAt')
+			.skip(page * perPage)
+			.limit(perPage)
 			.populate('user', 'id name');
-		res.status(200).json(orders);
+		res.status(200).json({ orders: orders, count: count });
 	} catch (e) {
-		res.status(404).json({ msg: e.message });
+		console.log(e);
+		res.status(500).json({ msg: e.message });
 	}
 });
 
