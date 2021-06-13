@@ -12,6 +12,7 @@ router.post('/', async (req, res) => {
 		products = await Product.find()
 			.where({
 				$or: [{ name: regex }, { category: regex }],
+				status: { $nin: ['archived', 'hidden'] },
 			})
 			.limit(5);
 	}

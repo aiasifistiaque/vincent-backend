@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/', getAllCategories);
 router.get('/sub', getSubCategories);
-router.get('/cat/:id', getProductByCategory);
+router.post('/cat/:id', getProductByCategory);
 router.get('/homecat/:id', getHomeProductByCategory);
 
 export default router;

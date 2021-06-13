@@ -16,6 +16,8 @@ router.post(
 		else if (option == 'oldest') sort = 'createdAt';
 		else if (option == 'nameAsc') sort = 'name';
 		else if (option == 'nameDec') sort = '-name';
+		else if (option == 'priceUp') sort = 'price';
+		else if (option == 'priceDown') sort = '-price';
 
 		const products = await Product.find({
 			status: { $nin: ['hidden', 'archived'] },

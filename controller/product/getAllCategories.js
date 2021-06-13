@@ -15,8 +15,13 @@ export const getAllCategories = asyncHandler(async (req, res) => {
 
 export const getProductByCategory = asyncHandler(async (req, res) => {
 	let sort = '-createdAt';
+	const perPage = 12;
+	const page = req.body.page || 0;
 
-	const categories = await Product.find({ category: req.params.id }).sort(sort);
+	const categories = await Product.find({ category: req.params.id })
+		.sort(sort)
+		.skip(page * perPage)
+		.limit(perPage);
 	if (categories) {
 		res.status(200).json(categories);
 	} else {
