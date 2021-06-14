@@ -4,7 +4,7 @@ import asyncHandler from 'express-async-handler';
 const createNewPorduct = asyncHandler(async (req, res) => {
 	if (req.body.upload == true) {
 	}
-	//console.log(req);
+
 	try {
 		const product = new Product({
 			name: req.body.name,

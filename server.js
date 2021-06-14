@@ -15,6 +15,7 @@ import exploreRoute from './routes/exploreRoute.js';
 import dashRoute from './routes/dashRoute.js';
 import uploadRoute from './routes/uploadRoute.js';
 import path from 'path';
+import reviewRoute from './routes/reviewRoute.js';
 
 dotenv.config();
 
@@ -54,6 +55,7 @@ app.use('/api/search', searchRoute);
 app.use('/api/explore', exploreRoute);
 app.use('/api/dashboard', dashRoute);
 app.use('/api/upload', uploadRoute);
+app.use('/api/review', reviewRoute);
 
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));

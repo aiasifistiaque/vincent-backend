@@ -22,6 +22,8 @@ const orderSchema = mongoose.Schema(
 			},
 		],
 		status: { type: String, required: true, default: 'Order Placed' },
+		seen: { type: Number, required: true, default: 0 },
+
 		shippingAddress: {
 			phone: { type: String, required: true },
 			address: { type: String, required: true },
