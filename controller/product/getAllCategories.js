@@ -18,7 +18,14 @@ export const getProductByCategory = asyncHandler(async (req, res) => {
 	const perPage = 12;
 	const page = req.body.page || 0;
 
-	const categories = await Product.find({ category: req.params.id })
+	const categories = await Product.find({
+		$and: [
+			{ category: req.params.id },
+			{
+				status: { $nin: ['hidden', 'archived'] },
+			},
+		],
+	})
 		.sort(sort)
 		.skip(page * perPage)
 		.limit(perPage);
@@ -33,7 +40,14 @@ export const getProductByCategory = asyncHandler(async (req, res) => {
 export const getHomeProductByCategory = asyncHandler(async (req, res) => {
 	let sort = '-createdAt';
 
-	const categories = await Product.find({ category: req.params.id })
+	const categories = await Product.find({
+		$and: [
+			{ category: req.params.id },
+			{
+				status: { $nin: ['hidden', 'archived'] },
+			},
+		],
+	})
 		.sort(sort)
 		.limit(6);
 

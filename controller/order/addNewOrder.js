@@ -2,9 +2,12 @@ import asyncHandler from 'express-async-handler';
 import Order from '../../models/orderModel.js';
 import sendMail from '../mail/sendMail.js';
 import sendMailToCustomer from '../mail/sendMailToCustomer.js';
+import Product from '../../models/productModel.js';
 
 const addNewOrder = asyncHandler(async (req, res) => {
 	const { orderItems } = req.body;
+
+	console.log(req.body);
 
 	//console.log(req.body);
 
@@ -21,6 +24,17 @@ const addNewOrder = asyncHandler(async (req, res) => {
 			shippingPrice: req.body.shippingPrice,
 			totalPrice: req.body.totalPrice,
 		});
+
+		orderItems.map(async item => {
+			try {
+				const prod = await Product.findById(item.product);
+				prod.countInStock = prod.countInStock - item.qty;
+				await prod.save();
+			} catch (e) {
+				console.log(e);
+			}
+		});
+
 		try {
 			const createdOrder = await order.save();
 			const findOrder = await Order.findById(createdOrder._id).populate(
