@@ -30,7 +30,9 @@ const writeReview = asyncHandler(async (req, res) => {
 
 		product.numReviews = product.reviews.length;
 
-		const saveProd = product.save();
+		const saveProd = await product.save();
+
+		console.log(saveProd);
 
 		res.status(201).json({ message: 'review added', product: saveProd });
 	} catch (e) {
