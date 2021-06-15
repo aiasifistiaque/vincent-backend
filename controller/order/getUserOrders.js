@@ -8,9 +8,9 @@ const getUserOrders = asyncHandler(async (req, res) => {
 
 	try {
 		if (req.body.status == 'Past') {
-			select = { status: 'completed' };
+			select = { status: { $in: ['completed', 'archived', 'cancelled'] } };
 		} else if (req.body.status == 'Current') {
-			select = { status: { $nin: ['completed,archived,cancelled'] } };
+			select = { status: { $nin: ['completed', 'archived', 'cancelled'] } };
 		}
 
 		const count = await Order.countDocuments({
