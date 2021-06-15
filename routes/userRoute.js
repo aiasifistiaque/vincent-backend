@@ -6,6 +6,10 @@ import getAnUser from '../controller/user/getAnUser.js';
 import editRole from '../controller/user/editRole.js';
 import getUserByMail from '../controller/user/getUserByMail.js';
 import editUser from '../controller/user/editUser.js';
+import sendOtp from '../controller/user/sendOtp.js';
+import verifyOtp from '../controller/user/verifyOtp.js';
+import resetPassword from '../controller/user/resetPassword.js';
+import changePassword from '../controller/user/changePassword.js';
 
 const router = express.Router();
 
@@ -20,5 +24,13 @@ router.route('/getuserbymail').post(protect, admin, getUserByMail);
 router.route('/editrole').post(protect, admin, editRole);
 
 router.route('/edituser').put(protect, editUser);
+
+router.route('/sendotp').post(sendOtp);
+
+router.route('/verifyOtp').post(verifyOtp);
+
+router.route('/resetpassword').post(resetPassword);
+
+router.route('/changepassword').post(protect, changePassword);
 
 export default router;

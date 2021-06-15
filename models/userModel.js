@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema(
 			trim: true,
 		},
 
+		resetCode: {
+			type: String,
+		},
+
 		address: String,
 		city: String,
 		postalCode: String,
