@@ -9,7 +9,6 @@ const editUser = asyncHandler(async (req, res) => {
 		user.name = name;
 		user.phone = phone;
 		const savedUser = user.save();
-		//console.log(savedUser);
 		res.status(200).json(savedUser);
 	} catch (e) {
 		console.log(e);
