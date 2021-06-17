@@ -7,6 +7,11 @@ const getSingleOrder = asyncHandler(async (req, res) => {
 			'user',
 			'id name email'
 		);
+
+		if (req.user.role != 'admin' && order.user._id != req.user._id) {
+			return res.status(401).send('Unauthoized');
+		}
+
 		res.status(200).json(order);
 	} catch (e) {
 		res.status(404).json({ msg: e.message });

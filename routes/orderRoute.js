@@ -15,7 +15,7 @@ router
 	.post(protect, addNewOrder)
 	.put(protect, admin, editOrder);
 
-router.get('/:id', getSingleOrder);
+router.get('/:id', protect, getSingleOrder);
 
 router.post('/userorder', protect, getUserOrders);
 
