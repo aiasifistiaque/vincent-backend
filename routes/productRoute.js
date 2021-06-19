@@ -12,6 +12,8 @@ router.post('/', getAllProducts);
 
 router.post('/createproduct', protect, admin, createNewPorduct);
 
+router.post('/changepicture', protect, admin, createNewPorduct);
+
 router
 	.route('/:id')
 	.get(getSingleProduct)
