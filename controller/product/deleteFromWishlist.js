@@ -29,7 +29,7 @@ const deleteFromWishlist = asyncHandler(async (req, res) => {
 				user.wishlist = newWishList;
 				const saveUser = await user.save();
 
-				product.wishlisted = product.wishlisted + 1;
+				product.wishlisted = product.wishlisted - 1;
 				const saveProd = await product.save();
 
 				res.status(200).json({ success: true, wishlist: saveUser.wishlist });
