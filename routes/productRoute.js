@@ -5,6 +5,7 @@ import getSingleProduct from '../controller/product/getSingleProduct.js';
 import createNewPorduct from '../controller/product/createNewProduct.js';
 import deleteProduct from '../controller/product/deleteProduct.js';
 import editProduct from '../controller/product/editProduct.js';
+import changePicture from '../controller/product/changePicture.js';
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ router.post('/', getAllProducts);
 
 router.post('/createproduct', protect, admin, createNewPorduct);
 
-router.post('/changepicture', protect, admin, createNewPorduct);
+router.post('/changepicture', changePicture);
 
 router
 	.route('/:id')
