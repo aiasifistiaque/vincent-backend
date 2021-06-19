@@ -6,7 +6,7 @@ const changePicture = asyncHandler(async (req, res) => {
 	try {
 		const product = await Product.findById(req.body.id);
 		product.image = req.body.image;
-		const saveProd = product.save();
+		const saveProd = await product.save();
 		res.status(200).json(saveProd);
 	} catch (e) {
 		res.status(500).json({ msg: e.message });
