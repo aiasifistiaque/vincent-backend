@@ -30,6 +30,8 @@ const userSchema = new mongoose.Schema(
 			type: String,
 		},
 
+		wishlist: [],
+
 		address: String,
 		city: String,
 		postalCode: String,

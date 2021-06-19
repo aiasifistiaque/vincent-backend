@@ -45,6 +45,11 @@ const productSchema = mongoose.Schema(
 			default: 'visible',
 		},
 
+		wishlisted: {
+			type: Number,
+			default: 0,
+		},
+
 		subCategory: {
 			type: String,
 		},
