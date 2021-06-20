@@ -15,20 +15,23 @@ const addToWishList = asyncHandler(async (req, res) => {
 			return res.status(400).send('product does not exist');
 		}
 
-		if (user && product) {
-			const alreadyAdded = user.wishlist.find(
-				r => r.toString() === req.user._id.toString()
-			);
+		console.log(req.user._id);
+		console.log(user.wishlist);
+		const alreadyAdded = user.wishlist.find(
+			r => r.toString() === req.params.id.toString()
+		);
 
-			if (alreadyAdded) {
-				return res.status(400).send('Item Already added to wishlist');
-			} else {
-				user.wishlist.push(req.params.id);
-				const saveUser = await user.save();
-				product.wishlisted = product.wishlisted + 1;
-				const saveProd = await product.save();
-				res.status(200).json({ success: true, wishlist: saveUser.wishlist });
-			}
+		console.log(alreadyAdded);
+
+		if (alreadyAdded) {
+			console.log('Item Already in wishlist');
+			return res.status(400).send('Item Already added to wishlist');
+		} else {
+			user.wishlist.push(req.params.id);
+			const saveUser = await user.save();
+			product.wishlisted = product.wishlisted + 1;
+			const saveProd = await product.save();
+			res.status(200).json({ success: true, wishlist: saveUser.wishlist });
 		}
 	} catch (e) {
 		res.status(500).json({ msg: e.message });

@@ -29,6 +29,7 @@ const addNewOrder = asyncHandler(async (req, res) => {
 			try {
 				const prod = await Product.findById(item.product);
 				prod.countInStock = prod.countInStock - item.qty;
+				prod.totalSold = prod.totalSold + item.qty;
 				await prod.save();
 			} catch (e) {
 				console.log(e);
