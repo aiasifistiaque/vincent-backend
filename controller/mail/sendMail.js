@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import getUnixToDate from '../../functions/unixToDate.js';
 
-const sendMail = order => {
+const sendMail = (order, to) => {
 	console.log(order);
 	let quantity = 0;
 	order.orderItems.map(x => (quantity = quantity + x.qty));
@@ -34,7 +34,7 @@ const sendMail = order => {
 
 		var mailOptions = {
 			from: from,
-			to: 'asifistiaque.ai@gmail.com',
+			to: 'vincentsphere@gmail.com',
 			subject: `Vincent's Sphere Order Summary (Order #${order._id})`,
 			text: 'Order placed Successfully',
 			html: `<div>

@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import Product from './models/productModel.js';
 import connectDB from './db.js';
 import colors from 'colors';
-import { pData } from './data/pData.js';
+import { pData } from './data/pDataFinal.js';
 
 dotenv.config();
 connectDB();
