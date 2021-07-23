@@ -16,6 +16,8 @@ import dashRoute from './routes/dashRoute.js';
 import uploadRoute from './routes/uploadRoute.js';
 import path from 'path';
 import reviewRoute from './routes/reviewRoute.js';
+import * as Sentry from '@sentry/node';
+import * as Tracing from '@sentry/tracing';
 
 dotenv.config();
 
@@ -27,6 +29,29 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'development') {
 	app.use(morgan('dev'));
 }
+
+/**Sentry initialization */
+Sentry.init({
+	dsn:
+		'https://9f66bbc636ff442492ad1ffb828e0c99@o866660.ingest.sentry.io/5876859',
+	integrations: [
+		// enable HTTP calls tracing
+		new Sentry.Integrations.Http({ tracing: true }),
+		// enable Express.js middleware tracing
+		new Tracing.Integrations.Express({ app }),
+	],
+
+	// Set tracesSampleRate to 1.0 to capture 100%
+	// of transactions for performance monitoring.
+	// We recommend adjusting this value in production
+	tracesSampleRate: 1.0,
+});
+
+// RequestHandler creates a separate execution context using domains, so that every
+// transaction/span/breadcrumb is attached to its own Hub instance
+app.use(Sentry.Handlers.requestHandler());
+// TracingHandler creates a trace for every incoming request
+app.use(Sentry.Handlers.tracingHandler());
 
 const corsOptions = {
 	origin: '*',
@@ -56,6 +81,17 @@ app.use('/api/explore', exploreRoute);
 app.use('/api/dashboard', dashRoute);
 app.use('/api/upload', uploadRoute);
 app.use('/api/review', reviewRoute);
+
+// The error handler must be before any other error middleware and after all controllers
+app.use(Sentry.Handlers.errorHandler());
+
+// Optional fallthrough error handler
+app.use(function onError(err, req, res, next) {
+	// The error id is attached to `res.sentry` to be returned
+	// and optionally displayed to the user for support.
+	res.statusCode = 500;
+	res.end(res.sentry + '\n');
+});
 
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));

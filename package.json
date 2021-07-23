@@ -16,8 +16,8 @@
 	"license": "ISC",
 	"dependencies": {
 		"@fortawesome/free-regular-svg-icons": "^5.15.3",
-		"@sentry/node": "^6.7.1",
-		"@sentry/tracing": "^6.7.1",
+		"@sentry/node": "^6.10.0",
+		"@sentry/tracing": "^6.10.0",
 		"bcrypt": "^5.0.1",
 		"colors": "^1.4.0",
 		"cors": "^2.8.5",
